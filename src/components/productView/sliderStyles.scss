@@ -1,0 +1,97 @@
+@use "../../styles/mixins";
+@use "../../styles/variables";
+@import "../../styles/mediaqueries";
+
+
+.slick-slider{
+  .slick-list {
+    overflow: hidden;
+    .slick-track {
+      max-height: 400px;
+      @include devices(tablet) {
+        max-height: 300px;
+      }
+    }
+  }
+}
+
+
+.slick-slider.slick-vertical {
+  @include devices(mobile) {
+    display: none;
+  }
+}
+
+.thumbnailsSlider {
+  width: 20%;
+  max-width: 574px;
+  max-height: 500px;
+  .slick-slide {
+    width: 100%!important;
+  }
+  .slick-track {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+
+   
+
+  }
+}
+
+.sliderContainer {
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  width: 48%;
+  max-height: 500px;
+  padding: 0 15px;
+
+  @include devices(mobile) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    overflow: hidden;
+    padding-bottom: 50px;
+  }
+}
+
+.vertical-slider{
+  display: none;
+}
+
+.mainSlider {
+  width: 80%;
+  max-width: 400px;
+  max-height: 400px;
+}
+.slick-slide {
+  outline: none;
+}
+
+.slick-slide div {
+  outline: none;
+}
+
+.slick-slide {
+  &:focus, a {
+    outline: none;
+  }
+}
+
+
+.littlePhoto {
+  width: 100%;
+  max-width: 100px;
+  height: auto;
+}
+.slick-arrow.slick-prev, .slick-arrow.slick-next{
+  display: none!important;
+}
+.slick-dots{
+  position: sticky;
+  display: block;
+  bottom: 0;
+}

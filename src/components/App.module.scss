@@ -1,0 +1,32 @@
+@import "../styles/mediaqueries";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: 0 auto; 
+}
+
+header {
+  display: flex;
+
+  flex-shrink: 0;
+}
+
+main {
+  flex-grow: 1;
+}
+
+footer {
+  flex-shrink: 0;
+}
+
+.scrollToTopButton {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  border: none;
+  border-radius: 25%;
+  cursor: pointer;
+}

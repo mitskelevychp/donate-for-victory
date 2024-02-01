@@ -1,0 +1,59 @@
+@use "./reset";
+
+@font-face {
+    font-weight: 400;
+    font-family: "CeraProRegular";
+    font-style: normal;
+    src: url("../fonts/CeraProRegular.ttf") format("truetype"),
+    url("../fonts/CeraProRegular.woff") format("woff"),
+    url("../fonts/CeraProRegular.woff2") format("woff2");
+}
+
+@font-face {
+    font-weight: 500;
+    font-family: "CeraProMedium";
+    font-style: normal;
+    src: url("../fonts/CeraPro-Medium.ttf") format("truetype"),
+    url("../fonts/CeraPro-Medium.woff") format("woff"),
+    url("../fonts/CeraPro-Medium.woff2") format("woff2");
+}
+
+@font-face {
+    font-weight: 700;
+    font-family: "CeraProBold";
+    font-style: normal;
+    src: url("../fonts/CeraProBold.ttf") format("truetype"),
+    url("../fonts/CeraProBold.woff") format("woff"),
+    url("../fonts/CeraProBold.woff2") format("woff2");
+}
+
+// styles
+* {
+    font-family: "CeraProRegular", serif;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 30px;
+}
+
+h2 {
+    font-weight: 700;
+    font-size: 20px;
+}
+
+h3 {
+    font-weight: 700;
+    font-size: 18px;
+}
+
+h4 {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+.errorText{
+    color: red;
+    font-weight: 700;
+    font-size: 24px;
+}
