@@ -12,7 +12,6 @@ import { logOut } from "../../redux/actions/loggedInActions";
 import { resetCart, resetFavorites } from "../../redux/actions/cartActions";
 import styles from "./Header.module.scss";
 
-
 function BurgerMenu({ toggleBar }) {
   const [isOpen, setIsOpen] = useState(false);
   const isUserLoggedIn = localStorage.getItem("userLogin") || null;
@@ -35,7 +34,7 @@ function BurgerMenu({ toggleBar }) {
       localStorage.removeItem("Cart");
       localStorage.removeItem("token");
       localStorage.removeItem("Favorites");
-  
+
       dispatch(resetCart());
       dispatch(resetFavorites());
       dispatch(logOut());
@@ -52,9 +51,16 @@ function BurgerMenu({ toggleBar }) {
         <div className={styles.bar} />
       </button>
       {isOpen && (
-        <div className={`${styles.menuListWrapper} ${isOpen ? styles.open : ""}`}>
+        <div
+          className={`${styles.menuListWrapper} ${isOpen ? styles.open : ""}`}
+        >
           <div className={styles.buttonWrapper}>
-            <button className={`${styles.toggleButton} ${isOpen ? styles.cross : ""} ${styles.toggleButtonClose}`} onClick={toggleMenu}>
+            <button
+              className={`${styles.toggleButton} ${
+                isOpen ? styles.cross : ""
+              } ${styles.toggleButtonClose}`}
+              onClick={toggleMenu}
+            >
               <div className={styles.bar} />
               <div className={styles.bar} />
               <div className={styles.bar} />
@@ -74,21 +80,62 @@ function BurgerMenu({ toggleBar }) {
               {isLoggedInFromRedux ? <IconOut /> : <IconEnter />}
             </Button>
           </div>
-          <div className={styles.menuList} role="button" tabIndex={0} onKeyPress={toggleMenu}>
-            <Link to="/" className={styles.menuItem} onClick={toggleMenu}>Головна</Link>
-            <Link to="/about-us" className={styles.menuItem} onClick={toggleMenu}>Про Нас</Link>
-            <Link to="/categories" className={styles.menuItem} onClick={toggleMenu}>Категорії</Link>
-            <Link to="/blog" className={styles.menuItem} onClick={toggleMenu}>Новини</Link>
-            { isUserLoggedIn ? <Link to="/account" onClick={toggleMenu} className={styles.menuItem}>Кабінет</Link> : null }
-          </div>
-          <div className={isUserLoggedIn ? styles.iconsWrapper : styles.iconsWrapperLogOut}>
+          <div
+            className={styles.menuList}
+            role="button"
+            tabIndex={0}
+            onKeyPress={toggleMenu}
+          >
+            <Link to="/" className={styles.menuItem} onClick={toggleMenu}>
+              Головна
+            </Link>
+            <Link
+              to="/about-us"
+              className={styles.menuItem}
+              onClick={toggleMenu}
+            >
+              Про Нас
+            </Link>
+            <Link
+              to="/categories"
+              className={styles.menuItem}
+              onClick={toggleMenu}
+            >
+              Категорії
+            </Link>
+            <Link to="/blog" className={styles.menuItem} onClick={toggleMenu}>
+              Новини
+            </Link>
             {isUserLoggedIn ? (
-              <Link to="/favorites" className={`${styles.icon} ${styles.iconMobile}`} onClick={toggleMenu}>
+              <Link
+                to="/account"
+                onClick={toggleMenu}
+                className={styles.menuItem}
+              >
+                Кабінет
+              </Link>
+            ) : null}
+          </div>
+          <div
+            className={
+              isUserLoggedIn ? styles.iconsWrapper : styles.iconsWrapperLogOut
+            }
+          >
+            {isUserLoggedIn ? (
+              <Link
+                to="/favorites"
+                className={`${styles.icon} ${styles.iconMobile}`}
+                onClick={toggleMenu}
+              >
                 <HeartFavorite />
                 {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
               </Link>
             ) : null}
-            <Link to="/cart" className={`${styles.icon} ${styles.iconMobile}`} onClick={toggleMenu}>
+            <Link
+              to="/cart"
+              className={`${styles.icon} ${styles.iconMobile}`}
+              onClick={toggleMenu}
+            >
               <Cart />
               {cartCount === 0 ? null : <span>{cartCount}</span>}
             </Link>

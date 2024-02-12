@@ -1,5 +1,9 @@
 import React, {
-  useState, useContext, useEffect, useRef, useCallback,
+  useState,
+  useContext,
+  useEffect,
+  useRef,
+  useCallback,
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -9,11 +13,12 @@ import styles from "./Header.module.scss";
 import SearchIcon from "./SearchIcon";
 import SearchForm from "./SearchForm";
 
-
-function SearchInHeader() {
+function Search() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
   const [inputVisible, setInputVisible] = useState(false);
-  const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
+  const inputValueFromRedux = useSelector(
+    (state) => state.inputValue.inputValue
+  );
   const [inputValue, setInputValue] = useState(inputValueFromRedux);
   const context = useContext(Context);
   const dispatch = useDispatch();
@@ -31,25 +36,25 @@ function SearchInHeader() {
     context.setIsLinkVisible(!visibility);
   };
 
-  const handleClickOutside = useCallback((event) => {
-    if (searchContainer.current && !searchContainer.current.contains(event.target)) {
-      setInputVisible(false);
-      setIsLinkVisible(true);
-      context.setIsLinkVisible(true);
-    }
-  }, [context]);
-
-  const handleInputDoubleClick = (event) => {
-    event.preventDefault();
-    setInputValue("");
-    setInputVisible(false);
-  };
+  const handleClickOutside = useCallback(
+    (event) => {
+      if (
+        searchContainer.current &&
+        !searchContainer.current.contains(event.target)
+      ) {
+        setInputVisible(false);
+        setIsLinkVisible(true);
+        context.setIsLinkVisible(true);
+      }
+    },
+    [context]
+  );
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
+    // return () => {
+    //   document.removeEventListener("mousedown", handleClickOutside);
+    // };
   }, [handleClickOutside]);
 
   useEffect(() => {
@@ -65,9 +70,8 @@ function SearchInHeader() {
   return (
     <div
       className={
-        isLinkVisible ? styles.hiddenSearchMenu
-          : styles.hiddenSearchMenuHidden
-        }
+        isLinkVisible ? styles.hiddenSearchMenu : styles.hiddenSearchMenuHidden
+      }
       ref={searchContainer}
     >
       {isLinkVisible ? (
@@ -77,11 +81,11 @@ function SearchInHeader() {
           inputValue={inputValue}
           handleInputChange={handleInputChange}
           handleSearch={handleSearch}
-          handleInputDoubleClick={handleInputDoubleClick}
+          ref={searchContainer}
         />
       )}
     </div>
   );
 }
 
-export default SearchInHeader;
+export default Search;

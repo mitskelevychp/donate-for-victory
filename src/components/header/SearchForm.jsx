@@ -10,7 +10,9 @@ function SearchForm() {
   const dispatch = useDispatch();
   const [searchResults, setSearchResults] = useState([]);
   const [showInput, setShowInput] = useState(false);
-  const inputValueFromRedux = useSelector((state) => state.inputValue.inputValue);
+  const inputValueFromRedux = useSelector(
+    (state) => state.inputValue.inputValue
+  );
   const [inputValue, setInputValue] = useState(inputValueFromRedux);
   const [debounceTimeoutId, setDebounceTimeoutId] = useState(null);
   const getProductDetails = async (productId) => {
@@ -26,12 +28,12 @@ function SearchForm() {
       const searchPhrases = {
         query,
       };
-  
+
       const response = await axios.post(GET_SEARCH, searchPhrases);
       const products = response.data;
-  
+
       setSearchResults(products);
-  
+
       if (products.length > 0) {
         setShowInput(true);
       } else {
@@ -47,7 +49,7 @@ function SearchForm() {
   const handleResultClick = async (result) => {
     setSearchResults([]);
     setShowInput(false);
-  
+
     if (result) {
       await getProductDetails(result.id);
     }
@@ -69,7 +71,7 @@ function SearchForm() {
       const newTimeoutId = setTimeout(() => {
         performSearch(value);
       }, 1000);
-      
+
       setDebounceTimeoutId(newTimeoutId);
     }
   };
@@ -85,19 +87,23 @@ function SearchForm() {
           onChange={handleInputChange}
         />
         {showInput && (
-        <div className={styles.searchResults}>
-          <ul>
-            {searchResults.length > 0 && inputValue !== "" && (
-              searchResults.map((result) => (
-                <li className={styles.searchResultItem} key={result.id}>
-                  <Link to={`/product/${result.itemNo}`} key={result.id} className={styles.searchResultItem}>
-                    {result.shortName}
-                  </Link>
-                </li>
-              ))
-            )}
-          </ul>
-        </div>
+          <div className={styles.searchResults}>
+            <ul>
+              {searchResults.length > 0 &&
+                inputValue !== "" &&
+                searchResults.map((result) => (
+                  <li className={styles.searchResultItem} key={result.id}>
+                    <Link
+                      to={`/product/${result.itemNo}`}
+                      key={result.id}
+                      className={styles.searchResultItem}
+                    >
+                      {result.shortName}
+                    </Link>
+                  </li>
+                ))}
+            </ul>
+          </div>
         )}
       </div>
     </div>
