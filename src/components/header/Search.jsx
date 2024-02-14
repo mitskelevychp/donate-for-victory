@@ -6,12 +6,14 @@ import React, {
   useCallback,
 } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Context from "../Context";
 import { updateInputValue } from "../../redux/actionsCreators/inputValueActionsCreators";
 import styles from "./Header.module.scss";
 import SearchIcon from "./SearchIcon";
 import SearchForm from "./SearchForm";
+import HeartFavorite from "./icons/favorites/Heart";
+import Cart from "./icons/cart/IconCart";
 
 function Search() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
@@ -24,6 +26,9 @@ function Search() {
   const dispatch = useDispatch();
   const searchContainer = useRef(null);
   const navigate = useNavigate();
+  const isLoggedInFromRedux = useSelector((state) => state.auth.isLoggedIn);
+  const favoriteCount = useSelector((state) => state.favorites.itemCount);
+  const cartCount = useSelector((state) => state.cart.itemCount);
 
   const handleSearch = () => {
     navigate(`/products-search?query=${inputValue}`);
@@ -52,9 +57,6 @@ function Search() {
 
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
-    // return () => {
-    //   document.removeEventListener("mousedown", handleClickOutside);
-    // };
   }, [handleClickOutside]);
 
   useEffect(() => {
@@ -68,14 +70,27 @@ function Search() {
   };
 
   return (
-    <div
-      className={
-        isLinkVisible ? styles.hiddenSearchMenu : styles.hiddenSearchMenuHidden
-      }
-      ref={searchContainer}
-    >
+    <div className={isLinkVisible ? styles.search : styles.searchHidden}>
       {isLinkVisible ? (
-        <SearchIcon onClick={toggleInputVisibility} />
+        <>
+          <SearchIcon onClick={toggleInputVisibility} />
+          <div className={styles.headerLaptopIcons}>
+            {isLoggedInFromRedux ? (
+              <div className={styles.navRightSideMenu}>
+                <Link to="/favorites">
+                  <HeartFavorite />
+                </Link>
+                {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
+              </div>
+            ) : null}
+            <div className={styles.navRightSideMenu}>
+              <Link to="/cart">
+                <Cart />
+              </Link>
+              {cartCount === 0 ? null : <span>{cartCount}</span>}
+            </div>
+          </div>
+        </>
       ) : (
         <SearchForm
           inputValue={inputValue}

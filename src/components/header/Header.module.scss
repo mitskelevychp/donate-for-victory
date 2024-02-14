@@ -12,15 +12,18 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 40px 15px 17px;
+  height: 80px;
+  padding: 15px 10px 15px 10px;
   position: relative;
 
-  // @include devices(mobile) {
-  //   display: flex;
-  //   // flex-direction: row-reverse;
-  //   justify-content: space-between;
-  //   align-items: center;
-  // }
+  @media screen and (min-width: 375px) {
+    height: 100px;
+    padding: 0px 10px 0px 10px;
+  }
+  @include devices(tablet) {
+    height: 100px;
+    padding: 0px 15px 0px 15px;
+  }
   @media screen and (max-width: 1023px) {
     display: flex;
     // flex-direction: row-reverse;
@@ -69,6 +72,20 @@
 
   @include devices(tablet) {
     justify-content: space-between;
+  }
+}
+
+.logo {
+  width: 100px;
+
+  @media screen and (min-width: 375px) and (max-width: 767px) {
+    width: 150px;
+  }
+  @include devices(tablet) {
+    width: auto;
+  }
+  @include devices(laptop) {
+    width: auto;
   }
 }
 
@@ -194,8 +211,8 @@
   justify-content: center;
 
   @include devices(mobile) {
-    flex-direction: column;
-    gap: 10px;
+    // flex-direction: column;
+    // gap: 10px;
   }
 }
 
@@ -209,13 +226,22 @@
   height: 20px;
 }
 
-.hiddenSearchMenu {
+.search {
+  width: 125px;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+
+  @include devices(laptop) {
+    width: 145px;
+  }
 }
 
-.hiddenSearchMenuHidden {
+.searchHidden {
   width: 100%;
+}
+
+.hidden {
+  display: none;
 }
 
 .searching {
@@ -225,9 +251,9 @@
   height: 40px;
   justify-content: flex-end;
 
-  @include devices(mobile) {
-    flex-direction: column;
-  }
+  // @include devices(mobile) {
+  //   flex-direction: column;
+  // }
 }
 
 .inputWrapper {
@@ -253,6 +279,7 @@ input:focus {
 .iconSearch {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 35px;
   cursor: pointer;
 }
