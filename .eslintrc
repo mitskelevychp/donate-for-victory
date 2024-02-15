@@ -7,6 +7,8 @@
   "extends": ["airbnb", "react-app"],
   "plugins": ["react"],
   "rules": {
+    "object-curly-newline": "off",
+    "react/jsx-one-expression-per-line": "off",
     "comma-dangle": "off",
     "max-len": "off",
     "operator-linebreak": "off",

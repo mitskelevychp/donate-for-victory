@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, forwardRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
@@ -6,7 +6,7 @@ import { updateInputValue } from "../../redux/actionsCreators/inputValueActionsC
 import { GET_PRODUCTS_URL, GET_SEARCH } from "../../endpoints/endpoints";
 import styles from "./Header.module.scss";
 
-function SearchForm() {
+const SearchForm = forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const [searchResults, setSearchResults] = useState([]);
   const [showInput, setShowInput] = useState(false);
@@ -85,6 +85,7 @@ function SearchForm() {
           placeholder="Пошук..."
           value={inputValue}
           onChange={handleInputChange}
+          ref={ref}
         />
         {showInput && (
           <div className={styles.searchResults}>
@@ -108,6 +109,6 @@ function SearchForm() {
       </div>
     </div>
   );
-}
+});
 
 export default SearchForm;

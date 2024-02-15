@@ -3,9 +3,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import HeartFavorite from "./icons/favorites/Heart";
 import Button from "../button/Button";
-import Cart from "./icons/cart/IconCart";
 import IconEnter from "./icons/enter/IconEnter";
 import IconOut from "./icons/enter/IconOut";
 import { logOut } from "../../redux/actions/loggedInActions";
@@ -16,8 +14,6 @@ function BurgerMenu({ toggleBar }) {
   const [isOpen, setIsOpen] = useState(false);
   const isUserLoggedIn = localStorage.getItem("userLogin") || null;
   const isLoggedInFromRedux = useSelector((state) => state.auth.isLoggedIn);
-  const cartCount = useSelector((state) => state.cart.itemCount);
-  const favoriteCount = useSelector((state) => state.favorites.itemCount);
   const dispatch = useDispatch();
 
   const toggleMenu = () => {
@@ -56,18 +52,19 @@ function BurgerMenu({ toggleBar }) {
         >
           <div className={styles.buttonWrapper}>
             <button
-              className={`${styles.toggleButton} ${
+              className={`${styles.toggleButton} ${styles.toggleCloseButton} ${
                 isOpen ? styles.cross : ""
               } ${styles.toggleButtonClose}`}
               onClick={toggleMenu}
             >
               <div className={styles.bar} />
               <div className={styles.bar} />
-              <div className={styles.bar} />
+              {/* <div className={styles.bar} /> */}
             </button>
             <Button
               toPage={isLoggedInFromRedux ? "/" : "/log-in"}
-              width="45px"
+              width="40px"
+              // height="35px"
               color=""
               onClick={() => {
                 if (isLoggedInFromRedux) {
@@ -115,30 +112,6 @@ function BurgerMenu({ toggleBar }) {
                 Кабінет
               </Link>
             ) : null}
-          </div>
-          <div
-            className={
-              isUserLoggedIn ? styles.iconsWrapper : styles.iconsWrapperLogOut
-            }
-          >
-            {isUserLoggedIn ? (
-              <Link
-                to="/favorites"
-                className={`${styles.icon} ${styles.iconMobile}`}
-                onClick={toggleMenu}
-              >
-                <HeartFavorite />
-                {favoriteCount === 0 ? null : <span>{favoriteCount}</span>}
-              </Link>
-            ) : null}
-            <Link
-              to="/cart"
-              className={`${styles.icon} ${styles.iconMobile}`}
-              onClick={toggleMenu}
-            >
-              <Cart />
-              {cartCount === 0 ? null : <span>{cartCount}</span>}
-            </Link>
           </div>
         </div>
       )}
