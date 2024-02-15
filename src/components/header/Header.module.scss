@@ -12,17 +12,17 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  height: 80px;
-  padding: 15px 10px 15px 10px;
+  height: 120px;
+  padding: 40px 10px 40px 10px;
   position: relative;
 
   @media screen and (min-width: 375px) {
-    height: 100px;
-    padding: 0px 10px 0px 10px;
+    height: 140px;
+    padding: 30px 10px 35px 10px;
   }
   @include devices(tablet) {
-    height: 100px;
-    padding: 0px 15px 0px 15px;
+    height: 140px;
+    padding: 30px 15px 35px 15px;
   }
   @media screen and (max-width: 1023px) {
     display: flex;
@@ -44,13 +44,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 45px;
-  height: 45px;
-  background: linear-gradient(
-    137deg,
-    variables.$bgc-second -24.6%,
-    variables.$bgc-main 100%
-  );
+  height: 40px;
+  background: variables.$bgc-main;
   border: none;
   border-radius: 14px;
   cursor: pointer;
@@ -78,7 +73,10 @@
 .logo {
   width: 100px;
 
-  @media screen and (min-width: 375px) and (max-width: 767px) {
+  @media screen and (min-width: 375px) and (max-width: 424px) {
+    width: 130px;
+  }
+  @media screen and (min-width: 425px) and (max-width: 767px) {
     width: 150px;
   }
   @include devices(tablet) {
@@ -89,10 +87,28 @@
   }
 }
 
+.logoImgWrapper {
+  height: 45px;
+
+  @media screen and (min-width: 375px) {
+    height: 55px;
+  }
+  @media screen and (min-width: 425px) {
+    height: 65px;
+  }
+  @include devices(tablet) {
+    height: 75px;
+  }
+  @include devices(laptop) {
+    height: 75px;
+  }
+}
+
 .navWrapper {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  // justify-content: space-between;
   width: 100%;
 }
 
@@ -100,6 +116,13 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+
+  @include devices(laptop) {
+    // display: flex;
+    // justify-content: space-around;
+    // width: 500px;
+    padding: 0px 100px;
+  }
 }
 
 .navItem {
@@ -227,7 +250,7 @@
 }
 
 .search {
-  width: 125px;
+  width: 115px;
   display: flex;
   justify-content: space-between;
 
@@ -265,10 +288,11 @@
 
 .input {
   padding: 0 10px;
+  margin-left: 20px;
   background-color: variables.$bgc-second;
   border: 1px solid #7c8d66;
   border-radius: 15px;
-  width: 80%;
+  width: 100%;
 }
 
 input:focus {
@@ -280,7 +304,7 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 35px;
+  // width: 35px;
   cursor: pointer;
 }
 
@@ -348,46 +372,71 @@ input:focus {
 }
 
 .toggleButton {
+  padding: 0;
   background: none;
   border: none;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 45px;
-  height: 45px;
+  width: 25px;
+  height: 30px;
+
+  @media screen and (min-width: 375px) {
+    width: 35px;
+    height: 45px;
+  }
 
   .bar {
     background-color: variables.$bgc-main;
-    // background-color: #333;
-    height: 3px;
+    height: 2px;
     width: 100%;
-    margin: 5px 0px;
+    margin: 2px 0px;
     transition: 0.3s ease;
     border-radius: 5px;
+
+    @media screen and (min-width: 375px) {
+      height: 3px;
+      margin: 5px 0px;
+    }
+    @media screen and (min-width: 768px) {
+      margin: 0px;
+    }
+  }
+}
+
+.toggleCloseButton {
+  position: relative;
+  margin-bottom: 5px;
+
+  @media screen and (min-width: 768px) {
+    margin-left: 5px;
+    height: 40px;
+  }
+
+  .bar {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform-origin: center;
+
+    // @media screen and (min-width: 768px) {
+    // }
   }
 
   &.cross {
     .bar:nth-child(1) {
-      transform: translate(0px, 15px) rotate(-45deg);
+      transform: translateY(-50%) rotate(-45deg);
     }
 
     .bar:nth-child(2) {
-      transform: translate(1px, 3px) rotate(45deg);
-    }
-
-    .bar:nth-child(3) {
-      opacity: 0;
+      transform: translateY(-50%) rotate(45deg);
     }
   }
 }
 
-.toggleButtonClose {
-  padding-top: 12px;
-}
-
 .menuListWrapper {
-  padding: 40px 15px 0px;
+  padding: 40px 10px 0px;
   position: fixed;
   z-index: 9;
   top: 0;
@@ -406,10 +455,17 @@ input:focus {
 .menuList {
   position: fixed;
   top: 100px;
-  left: 40%;
+  left: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media screen and (min-width: 425px) {
+    left: 38%;
+  }
+  @include devices(tablet) {
+    left: 42%;
+  }
 }
 
 .menuItem {
@@ -442,6 +498,11 @@ input:focus {
 .buttonWrapper {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+
+  @media screen and (min-width: 768px) {
+    height: 60px;
+  }
 }
 
 .button {

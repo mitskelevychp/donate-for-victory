@@ -1,21 +1,18 @@
-import React, {
-  useState,
-  // useContext
-} from "react";
-// import Context from "../Context";
+import React, { useState, useContext } from "react";
+import Context from "../Context";
 import Search from "./Search";
 import ActiveLink from "./ActiveLink";
 import styles from "./Header.module.scss";
 
 function Navigation() {
-  // const { isLinkVisible } = useContext(Context);
+  const { isLinkVisible } = useContext(Context);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
   const isUserLoggedIn = localStorage.getItem("userLogin") || null;
   const isAdmin = localStorage.getItem("isAdmin") || null;
 
-  // const style = {
-  //   display: isLinkVisible ? "flex" : "none",
-  // };
+  const style = {
+    display: isLinkVisible ? "flex" : "none",
+  };
 
   const showDropdown = () => {
     setDropdownVisible(true);
@@ -27,8 +24,8 @@ function Navigation() {
 
   return (
     <div className={styles.navWrapper}>
-      {/* <nav style={style} className={styles.nav}> */}
-      <nav className={styles.nav}>
+      <nav style={style} className={styles.nav}>
+        {/* <nav className={styles.nav}> */}
         <ul className={`${styles.navItem} ${styles.active}`}>
           <ActiveLink
             label="головна"

@@ -52,18 +52,19 @@ function BurgerMenu({ toggleBar }) {
         >
           <div className={styles.buttonWrapper}>
             <button
-              className={`${styles.toggleButton} ${
+              className={`${styles.toggleButton} ${styles.toggleCloseButton} ${
                 isOpen ? styles.cross : ""
               } ${styles.toggleButtonClose}`}
               onClick={toggleMenu}
             >
               <div className={styles.bar} />
               <div className={styles.bar} />
-              <div className={styles.bar} />
+              {/* <div className={styles.bar} /> */}
             </button>
             <Button
               toPage={isLoggedInFromRedux ? "/" : "/log-in"}
-              width="45px"
+              width="40px"
+              // height="35px"
               color=""
               onClick={() => {
                 if (isLoggedInFromRedux) {

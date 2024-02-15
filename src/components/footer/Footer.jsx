@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "./icons/logo.png";
+import logo from "../../images/logo.png";
 import { Location } from "./icons/location/Location";
 import { Message } from "./icons/message/Message";
 import { Call } from "./icons/call/Call";
@@ -69,7 +69,9 @@ function Footer() {
                 </li>
                 <li className={styles.contactsItem}>
                   <Message />
-                  <a href="mailto:donateforavictory@gmail.com">donateforavictory@gmail.com</a>
+                  <a href="mailto:donateforavictory@gmail.com">
+                    donateforavictory@gmail.com
+                  </a>
                 </li>
                 <li className={styles.contactsItem}>
                   <Call />

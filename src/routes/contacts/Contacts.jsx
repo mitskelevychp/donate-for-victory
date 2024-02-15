@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import {
-  Formik, Form, Field, ErrorMessage,
-} from "formik";
+import { Formik, Form, Field, ErrorMessage } from "formik";
 import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
 import DocumentTitle from "../DocumentTitle";
 import styles from "../../components/footer/Footer.module.scss";
@@ -10,16 +8,12 @@ import { Instagram } from "../../components/footer/icons/instagram/Instagram";
 import { Twitter } from "../../components/footer/icons/twitter/Twitter";
 import { Linkedin } from "../../components/footer/icons/linkedin/LinkedIn";
 import { Youtube } from "../../components/footer/icons/youtube/Youtube";
-import logo from "../../components/footer/icons/logo.png";
+import logo from "../../images/logo.png";
 import { FormButton } from "../../components/button/Button";
 import style from "./Contacts.module.scss";
 
 function LoginModal() {
-  return (
-    <div className={style.loginModal}>
-      Ваше звернення надіслано
-    </div>
-  );
+  return <div className={style.loginModal}>Ваше звернення надіслано</div>;
 }
 
 export function ContactMap() {
@@ -66,7 +60,6 @@ export function ContactForm() {
     promptLogin();
     resetForm();
   };
-
 
   return (
     <div>
@@ -171,11 +164,11 @@ export function ContactForm() {
             />
           </div>
           <div className={showLoginModal ? style.hidden : null}>
-            <FormButton type="submit">
-              Надіслати
-            </FormButton>
+            <FormButton type="submit">Надіслати</FormButton>
           </div>
-          { showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} /> }
+          {showLoginModal && (
+            <LoginModal onClose={() => setShowLoginModal(false)} />
+          )}
         </Form>
       </Formik>
     </div>
@@ -197,15 +190,18 @@ function Contacts() {
       <DocumentTitle title="Контакти" />
       <h1
         style={{
-          fontSize: "30px", marginTop: "10px", color: "#7c8d66", textTransform: "uppercase",
+          fontSize: "30px",
+          marginTop: "10px",
+          color: "#7c8d66",
+          textTransform: "uppercase",
         }}
       >
         Контакти
       </h1>
-      <p style={{ color: "rgb(61 61 61)", marginBottom: "10px" }}>Контактна інформація</p>
-      <div
-        className={style.contactPageWrapper}
-      >
+      <p style={{ color: "rgb(61 61 61)", marginBottom: "10px" }}>
+        Контактна інформація
+      </p>
+      <div className={style.contactPageWrapper}>
         <div style={containerStyle}>
           {" "}
           <div style={{ padding: "0", margin: "0 0 40px" }}>
@@ -222,8 +218,7 @@ function Contacts() {
                 style={{ fontSize: "28px", color: "#7c8d66" }}
               >
                 {" "}
-                +38 099 999-19-99
-                {" "}
+                +38 099 999-19-99{" "}
               </a>
             </div>
           </div>
