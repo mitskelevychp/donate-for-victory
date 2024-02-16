@@ -47,9 +47,7 @@ function BurgerMenu({ toggleBar }) {
         <div className={styles.bar} />
       </button>
       {isOpen && (
-        <div
-          className={`${styles.menuListWrapper} ${isOpen ? styles.open : ""}`}
-        >
+        <div className={`${styles.menuWrapper} ${isOpen ? styles.open : ""}`}>
           <div className={styles.buttonWrapper}>
             <button
               className={`${styles.toggleButton} ${styles.toggleCloseButton} ${
@@ -77,41 +75,38 @@ function BurgerMenu({ toggleBar }) {
               {isLoggedInFromRedux ? <IconOut /> : <IconEnter />}
             </Button>
           </div>
-          <div
-            className={styles.menuList}
-            role="button"
-            tabIndex={0}
-            onKeyPress={toggleMenu}
-          >
-            <Link to="/" className={styles.menuItem} onClick={toggleMenu}>
-              Головна
-            </Link>
-            <Link
-              to="/about-us"
-              className={styles.menuItem}
-              onClick={toggleMenu}
-            >
-              Про Нас
-            </Link>
-            <Link
-              to="/categories"
-              className={styles.menuItem}
-              onClick={toggleMenu}
-            >
-              Категорії
-            </Link>
-            <Link to="/blog" className={styles.menuItem} onClick={toggleMenu}>
-              Новини
-            </Link>
-            {isUserLoggedIn ? (
-              <Link
-                to="/account"
-                onClick={toggleMenu}
-                className={styles.menuItem}
-              >
-                Кабінет
+          <div className={styles.menuListWrapper}>
+            <div className={styles.menuList}>
+              <Link to="/" className={styles.menuItem} onClick={toggleMenu}>
+                Головна
               </Link>
-            ) : null}
+              <Link
+                to="/about-us"
+                className={styles.menuItem}
+                onClick={toggleMenu}
+              >
+                Про Нас
+              </Link>
+              <Link
+                to="/categories"
+                className={styles.menuItem}
+                onClick={toggleMenu}
+              >
+                Категорії
+              </Link>
+              <Link to="/blog" className={styles.menuItem} onClick={toggleMenu}>
+                Новини
+              </Link>
+              {isUserLoggedIn ? (
+                <Link
+                  to="/account"
+                  onClick={toggleMenu}
+                  className={styles.menuItem}
+                >
+                  Кабінет
+                </Link>
+              ) : null}
+            </div>
           </div>
         </div>
       )}

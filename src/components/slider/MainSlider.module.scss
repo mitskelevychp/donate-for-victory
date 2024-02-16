@@ -21,15 +21,22 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-top: -10px;
-  border-top: 50px solid variables.$bgc-main;
+  background-color: variables.$bgc-main;
+  border-radius: 0px 0px 5px 5px;
+  padding: 10px 0px 10px;
+
+  @media screen and (min-width: 425px) {
+    padding: 15px 0px 15px;
+  }
+  @include devices(laptop) {
+    padding: 20px 0px 20px;
+  }
 }
 
 .images {
   display: flex;
   justify-content: space-between;
   width: 80%;
-  margin-top: -30px;
 
   @include devices(mobile) {
     width: 90%;
@@ -54,18 +61,14 @@
   justify-content: center;
   width: 100%;
 
-  @include devices(mobile) {
-    border-radius: 25px;
-  }
-  
   & img {
     width: 100%;
     padding-top: 20px;
     background-color: variables.$bgc-main;
 
     @include devices(mobile) {
-      border-radius: 25px 25px 0px 0px;
-    }  
+      border-radius: 5px 5px 0px 0px;
+    }
   }
 }
 
@@ -77,14 +80,11 @@
   border: 1px solid variables.$bgc-second;
   border-radius: 10px;
   cursor: pointer;
-  transition: transform .5s;
+  transition: transform 0.5s;
+  transform: scale(1.2);
 }
 
 .secondPlaneImage {
-  opacity: .6;
-}
-
-.image:hover,
-.secondPlaneImage:hover {
-  transform: scale(1.1);
+  opacity: 0.6;
+  transform: scale(1);
 }

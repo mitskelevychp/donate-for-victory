@@ -232,15 +232,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @include devices(mobile) {
-    // flex-direction: column;
-    // gap: 10px;
-  }
+  margin-left: 15px;
 }
 
 .headerLaptopIcons {
-  min-width: 80px;
   display: flex;
   justify-content: space-between;
 }
@@ -250,13 +245,9 @@
 }
 
 .search {
-  width: 115px;
   display: flex;
   justify-content: space-between;
-
-  @include devices(laptop) {
-    width: 145px;
-  }
+  margin-left: 15px;
 }
 
 .searchHidden {
@@ -435,7 +426,7 @@ input:focus {
   }
 }
 
-.menuListWrapper {
+.menuWrapper {
   padding: 40px 10px 0px;
   position: fixed;
   z-index: 9;
@@ -448,24 +439,19 @@ input:focus {
   background-color: #fff;
 }
 
-.menuListWrapper.open {
+.menuWrapper.open {
+  width: 100%;
+}
+
+.menuListWrapper {
+  position: fixed;
   width: 100%;
 }
 
 .menuList {
-  position: fixed;
-  top: 100px;
-  left: 35%;
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  @media screen and (min-width: 425px) {
-    left: 38%;
-  }
-  @include devices(tablet) {
-    left: 42%;
-  }
 }
 
 .menuItem {

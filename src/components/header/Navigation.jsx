@@ -25,7 +25,6 @@ function Navigation() {
   return (
     <div className={styles.navWrapper}>
       <nav style={style} className={styles.nav}>
-        {/* <nav className={styles.nav}> */}
         <ul className={`${styles.navItem} ${styles.active}`}>
           <ActiveLink
             label="головна"
@@ -53,8 +52,8 @@ function Navigation() {
                 <ActiveLink
                   label="Всі категорії"
                   to="/categories"
-                  onClick={() => setDropdownVisible(false)}
                   className={styles.dropdownItemAllCategories}
+                  onClick={() => setDropdownVisible(false)}
                 />
                 <ActiveLink
                   label="Донати на ЗСУ"

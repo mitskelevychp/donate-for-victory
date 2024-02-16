@@ -76,8 +76,43 @@ const SearchForm = forwardRef((props, ref) => {
     }
   };
 
+  const isCategoryСlothes = searchResults
+    .map((result) => result.category === "Одяг")
+    .includes(true);
+  const isCategoryLots = searchResults
+    .map((result) => result.category === "Благодійний лот")
+    .includes(true);
+
+  function renderLink() {
+    if (isCategoryСlothes) {
+      return (
+        <Link
+          to="/categories/military-clothing"
+          className={styles.searchResultItem}
+        >
+          Одяг
+        </Link>
+      );
+    }
+    if (isCategoryLots) {
+      return (
+        <Link
+          to="/categories/charity-auction"
+          className={styles.searchResultItem}
+        >
+          Лоти
+        </Link>
+      );
+    }
+    return (
+      <Link to="/categories/donation" className={styles.searchResultItem}>
+        Донати
+      </Link>
+    );
+  }
+
   return (
-    <div className={styles.searching}>
+    <div className={styles.searching} ref={ref}>
       <div className={styles.inputWrapper}>
         <input
           className={styles.input}
@@ -85,7 +120,7 @@ const SearchForm = forwardRef((props, ref) => {
           placeholder="Пошук..."
           value={inputValue}
           onChange={handleInputChange}
-          ref={ref}
+          // ref={ref}
         />
         {showInput && (
           <div className={styles.searchResults}>
@@ -103,6 +138,7 @@ const SearchForm = forwardRef((props, ref) => {
                     </Link>
                   </li>
                 ))}
+              {searchResults.length > 0 && inputValue !== "" && renderLink()}
             </ul>
           </div>
         )}
