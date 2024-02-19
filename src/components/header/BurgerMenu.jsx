@@ -1,44 +1,21 @@
 /* eslint-disable react/button-has-type */
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-// import PropTypes from "prop-types";
 import Button from "../button/Button";
 import IconEnter from "./icons/enter/IconEnter";
 import IconOut from "./icons/enter/IconOut";
-import { logOut } from "../../redux/actions/loggedInActions";
-import { resetCart, resetFavorites } from "../../redux/actions/cartActions";
+import doLogOut from "../../scripts/doLogOut";
 import styles from "./Header.module.scss";
 
-// function BurgerMenu({ toggleBar }) {
 function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const isUserLoggedIn = localStorage.getItem("userLogin") || null;
   const isLoggedInFromRedux = useSelector((state) => state.auth.isLoggedIn);
-  const dispatch = useDispatch();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-    // toggleBar();
   };
-
-  async function doLogOut() {
-    try {
-      localStorage.removeItem("userLogin");
-      localStorage.removeItem("isAdmin");
-      localStorage.removeItem("CountCartProducts");
-      localStorage.removeItem("CountFavoritesProducts");
-      localStorage.removeItem("Cart");
-      localStorage.removeItem("token");
-      localStorage.removeItem("Favorites");
-
-      dispatch(resetCart());
-      dispatch(resetFavorites());
-      dispatch(logOut());
-    } catch (error) {
-      console.error("Помилка при виході:", error);
-    }
-  }
 
   return (
     <nav className={styles.wrapperMenu}>
@@ -58,12 +35,11 @@ function BurgerMenu() {
             >
               <div className={styles.bar} />
               <div className={styles.bar} />
-              {/* <div className={styles.bar} /> */}
             </button>
+
             <Button
               toPage={isLoggedInFromRedux ? "/" : "/log-in"}
               width="40px"
-              // height="35px"
               color=""
               onClick={() => {
                 if (isLoggedInFromRedux) {
@@ -98,6 +74,7 @@ function BurgerMenu() {
               <Link to="/blog" className={styles.menuItem} onClick={toggleMenu}>
                 Новини
               </Link>
+
               {isUserLoggedIn ? (
                 <Link
                   to="/account"
@@ -116,7 +93,3 @@ function BurgerMenu() {
 }
 
 export default BurgerMenu;
-
-// BurgerMenu.propTypes = {
-//   toggleBar: PropTypes.func,
-// };
