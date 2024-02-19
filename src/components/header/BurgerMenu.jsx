@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import Button from "../button/Button";
 import IconEnter from "./icons/enter/IconEnter";
 import IconOut from "./icons/enter/IconOut";
@@ -10,7 +10,8 @@ import { logOut } from "../../redux/actions/loggedInActions";
 import { resetCart, resetFavorites } from "../../redux/actions/cartActions";
 import styles from "./Header.module.scss";
 
-function BurgerMenu({ toggleBar }) {
+// function BurgerMenu({ toggleBar }) {
+function BurgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
   const isUserLoggedIn = localStorage.getItem("userLogin") || null;
   const isLoggedInFromRedux = useSelector((state) => state.auth.isLoggedIn);
@@ -18,7 +19,7 @@ function BurgerMenu({ toggleBar }) {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
-    toggleBar();
+    // toggleBar();
   };
 
   async function doLogOut() {
@@ -116,6 +117,6 @@ function BurgerMenu({ toggleBar }) {
 
 export default BurgerMenu;
 
-BurgerMenu.propTypes = {
-  toggleBar: PropTypes.func,
-};
+// BurgerMenu.propTypes = {
+//   toggleBar: PropTypes.func,
+// };

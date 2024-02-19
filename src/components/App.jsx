@@ -3,7 +3,10 @@ import { BrowserRouter } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import AppRoutes from "../routes/AppRoutes";
-import { initializeCart, initializeFavorites } from "../redux/actions/cartActions";
+import {
+  initializeCart,
+  initializeFavorites,
+} from "../redux/actions/cartActions";
 import { setAuthToken } from "../redux/actions/authActions";
 import { getProducts } from "../api/getProducts";
 import { getFilters } from "../api/getFilters";
@@ -19,8 +22,6 @@ import { FormButton } from "./button/Button";
 import { NEW_CART_URL, NEW_FAVORITES_URL } from "../endpoints/endpoints";
 import AppArrow from "../images/appArrow/AppArrow";
 import styles from "./App.module.scss";
-
-
 
 function App() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
@@ -41,7 +42,8 @@ function App() {
 
   useEffect(() => {
     const storedCartItems = JSON.parse(localStorage.getItem("Cart")) || [];
-    const storedFavoriteItems = JSON.parse(localStorage.getItem("Favorites")) || [];
+    const storedFavoriteItems =
+      JSON.parse(localStorage.getItem("Favorites")) || [];
 
     if (storedCartItems.length > 0) {
       dispatch(initializeCart(storedCartItems));
@@ -50,7 +52,6 @@ function App() {
       dispatch(initializeFavorites(storedFavoriteItems));
     }
   }, [dispatch]);
-
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -102,13 +103,11 @@ function App() {
       }
     };
 
-
     if (isLoggedIn) {
       fetchData();
       fetchFavoritesData();
     }
   }, [dispatch, isLoggedIn]);
-
 
   useEffect(() => {
     getProducts()
@@ -118,7 +117,7 @@ function App() {
       .catch((error) => {
         console.error("Помилка при отриманні товарів:", error);
       });
-      
+
     getFilters()
       .then((data) => {
         dispatch(setFilters(data));
@@ -145,8 +144,6 @@ function App() {
     };
   }, []);
 
-
-
   return (
     <div className={styles.container}>
       <BrowserRouter>
@@ -158,11 +155,15 @@ function App() {
           </Main>
           <Footer />
           {isVisible && (
-            <FormButton padding="6px 0px" width="50px" onClick={scrollToTop} className={styles.scrollToTopButton}>
+            <FormButton
+              padding="6px 0px"
+              width="50px"
+              onClick={scrollToTop}
+              className={styles.scrollToTopButton}
+            >
               <AppArrow />
             </FormButton>
           )}
-
         </Context.Provider>
       </BrowserRouter>
     </div>
