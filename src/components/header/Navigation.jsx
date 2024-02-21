@@ -1,12 +1,14 @@
 import React, { useState, useContext } from "react";
+import { Link } from "react-router-dom";
 import Context from "../Context";
 import Search from "./Search";
 import ActiveLink from "./ActiveLink";
+import { subCategories } from "../../content/menuItems";
 import styles from "./Header.module.scss";
 
 function Navigation() {
-  const { isLinkVisible } = useContext(Context);
   const [isDropdownVisible, setDropdownVisible] = useState(false);
+  const { isLinkVisible } = useContext(Context);
   const isUserLoggedIn = localStorage.getItem("userLogin") || null;
   const isAdmin = localStorage.getItem("isAdmin") || null;
 
@@ -15,76 +17,40 @@ function Navigation() {
   };
 
   const showDropdown = () => {
-    setDropdownVisible(true);
-  };
-
-  const hideDropdown = () => {
-    setDropdownVisible(false);
+    setDropdownVisible((prev) => !prev);
   };
 
   return (
     <div className={styles.navWrapper}>
       <nav style={style} className={styles.nav}>
         <ul className={`${styles.navItem} ${styles.active}`}>
-          <ActiveLink
-            label="головна"
-            to="/"
-            className={`${styles.navList} ${styles.navLink}`}
-          />
+          <ActiveLink label="головна" to="/" className={styles.navList} />
           <div
             className={styles.dropdown}
             onMouseEnter={showDropdown}
-            onMouseLeave={hideDropdown}
+            onMouseLeave={showDropdown}
           >
-            <div
-              className={`${styles.navList} ${styles.navLink} ${styles.navItemTablet}`}
-            >
-              категорії
-            </div>
-            <ActiveLink
-              label="категорії"
-              to="/categories"
-              onClick={() => setDropdownVisible(false)}
-              className={`${styles.navList} ${styles.navLink} ${styles.navItemLaptop}`}
-            />
+            <Link className={styles.navList}>Категорії</Link>
             {isDropdownVisible && (
               <div className={styles.dropdownContent}>
-                <ActiveLink
-                  label="Всі категорії"
-                  to="/categories"
-                  className={styles.dropdownItemAllCategories}
-                  onClick={() => setDropdownVisible(false)}
-                />
-                <ActiveLink
-                  label="Донати на ЗСУ"
-                  to="/categories/donation"
-                  onClick={() => setDropdownVisible(false)}
-                />
-                <ActiveLink
-                  label="Лоти аукціону"
-                  to="/categories/charity-auction"
-                  onClick={() => setDropdownVisible(false)}
-                />
-                <ActiveLink
-                  label="Військовий одяг"
-                  to="/categories/military-clothing"
-                  onClick={() => setDropdownVisible(false)}
-                />
+                {subCategories.map((item) => (
+                  <ActiveLink
+                    key={item.label}
+                    label={item.label}
+                    to={item.to}
+                    onClick={showDropdown}
+                    className={styles.navList}
+                  />
+                ))}
               </div>
             )}
           </div>
-          <ActiveLink
-            label="новини"
-            to="/blog"
-            onClick={() => setDropdownVisible(false)}
-            className={`${styles.navList} ${styles.navLink}`}
-          />
+          <ActiveLink label="новини" to="/blog" className={styles.navList} />
           {isUserLoggedIn ? (
             <ActiveLink
               label="кабінет"
               to={isAdmin === "false" ? "/account" : "/adm-page"}
-              onClick={() => setDropdownVisible(false)}
-              className={`${styles.navList} ${styles.navLink}`}
+              className={styles.navList}
             />
           ) : null}
         </ul>

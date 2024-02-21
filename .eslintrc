@@ -7,10 +7,14 @@
   "extends": ["airbnb", "react-app"],
   "plugins": ["react"],
   "rules": {
+    "no-underscore-dangle": "off",
+    "react/no-array-index-key": "off",
     "object-curly-newline": "off",
     "react/jsx-one-expression-per-line": "off",
     "comma-dangle": "off",
     "max-len": "off",
+    "function-paren-newline": "off",
+    "implicit-arrow-linebreak": "off",
     "operator-linebreak": "off",
     "quotes": ["error", "double"], //всі лапки подвійні
     "indent": [2], // Встановлення відступу на 2 пробіли

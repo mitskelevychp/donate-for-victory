@@ -8,11 +8,7 @@ function HeartFavorite() {
   const isFavoritesEmpty = favorites.length === 0;
   return (
     <div className={styles.icon}>
-      {isFavoritesEmpty ? (
-        <HeartSVG />
-      ) : (
-        <HeartFillSVG />
-      )}
+      {isFavoritesEmpty ? <HeartSVG /> : <HeartFillSVG />}
     </div>
   );
 }

@@ -1,30 +1,27 @@
 import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Form, Field, ErrorMessage, Formik,
-} from "formik";
+import { Form, Field, ErrorMessage, Formik } from "formik";
 import { object, string } from "yup";
 import CartItem from "./CartItem";
-import { FormButton } from "../../components/button/Button";
+import Button, { FormButton } from "../../components/button/Button";
 import { NEW_CART_URL, MAKE_ORDERS } from "../../endpoints/endpoints";
 import { resetCart } from "../../redux/actions/cartActions";
 import { deleteCart } from "../../api/updateCart";
 import styles from "./Cart.module.scss";
 
 function LoginModalPurchase() {
-  return (
-    <div className={styles.loginModalPurchase}>
-      Покупка оформлена!
-    </div>
-  );
+  return <div className={styles.loginModalPurchase}>Покупка оформлена!</div>;
 }
-
 
 function Cart() {
   const cartItems = useSelector((state) => state.cart.items);
   const currentDate = new Date();
-  const formattedDate = `${currentDate.getFullYear()}${(currentDate.getMonth() + 1).toString().padStart(2, "0")}${currentDate.getDate().toString().padStart(2, "0")}`;
+  const formattedDate = `${currentDate.getFullYear()}${(
+    currentDate.getMonth() + 1
+  )
+    .toString()
+    .padStart(2, "0")}${currentDate.getDate().toString().padStart(2, "0")}`;
   const orderNumber = `52-${formattedDate}`;
   const isCartEmpty = cartItems.length === 0;
   const dispatch = useDispatch();
@@ -64,7 +61,17 @@ function Cart() {
     setOpenForm(true);
   };
 
-  const handlePurchase = async (firstName = "", lastName = "", phone = "", email = "", region = "", city = "", address = "", postal = "", addressNp = "") => {
+  const handlePurchase = async (
+    firstName = "",
+    lastName = "",
+    phone = "",
+    email = "",
+    region = "",
+    city = "",
+    address = "",
+    postal = "",
+    addressNp = ""
+  ) => {
     if (isUserLoggedIn !== null) {
       try {
         const cartData = await getCartFromServer();
@@ -87,7 +94,7 @@ function Cart() {
             letterSubject: "Дякуємо за покупку та весок на підтримку ЗСУ!",
             letterHtml: `<h1>Ваше замовлення прийнято. Номер замовлення - ${orderNumber}.</h1><p>Ми переможемо!</p>`,
           };
-  
+
           axios
             .post(MAKE_ORDERS, newOrder)
             .then((response) => {
@@ -142,7 +149,7 @@ function Cart() {
             letterSubject: "Дякуємо за покупку та весок на підтримку ЗСУ!",
             letterHtml: `<h1>Ваше замовлення прийнято. Номер замовлення - ${orderNumber}.</h1><p>Ми переможемо!</p>`,
           };
-  
+
           axios
             .post(MAKE_ORDERS, newOrder)
             .then((response) => {
@@ -166,73 +173,101 @@ function Cart() {
   const validationSchema = object().shape({
     firstName: string()
       .required("Поле 'Ім'я' є обов'язковим для заповнення")
-      .matches(/[a-zA-Zа-яА-ЯіІїЇ'єЄ]/, "Дозволені символи для ім'я a-z, A-Z, а-я, А-Я")
+      .matches(
+        /[a-zA-Zа-яА-ЯіІїЇ'єЄ]/,
+        "Дозволені символи для ім'я a-z, A-Z, а-я, А-Я"
+      )
       .min(2, "Ім'я має містити від 2 до 25 символів")
       .max(25, "Ім'я має містити від 2 до 25 символів"),
     lastName: string()
       .required("Поле 'Прізвище' є обов'язковим для заповнення")
-      .matches(/[a-zA-Zа-яА-ЯіІїЇ'єЄ]/, "Дозволені символи для ім'я a-z, A-Z, а-я, А-Я")
+      .matches(
+        /[a-zA-Zа-яА-ЯіІїЇ'єЄ]/,
+        "Дозволені символи для ім'я a-z, A-Z, а-я, А-Я"
+      )
       .min(2, "Ім'я має містити від 2 до 25 символів")
       .max(25, "Ім'я має містити від 2 до 25 символів"),
     phone: string()
       .required("Поле 'Телефон' обов'язковим для заповнення")
-      .matches(/\d{3}\d{2}\d{2}\d{2}/, "Некорректний формат телефонного номера"),
+      .matches(
+        /\d{3}\d{2}\d{2}\d{2}/,
+        "Некорректний формат телефонного номера"
+      ),
     email: string()
       .email("Некорректний формат електронної адреси")
       .required("Поле 'email' є обов'язковим для заповнення"),
-    region: string()
-      .matches(/[a-zA-Zа-яА-ЯіІїЇ'єЄ]/, "Дозволені символи для ім'я a-z, A-Z, а-я, А-Я"),
-    city: string()
-      .matches(/[a-zA-Zа-яА-ЯіІїЇ'єЄ]/, "Дозволені символи для прізвища a-z, A-Z, а-я, А-Я"),
-    address: string()
-      .matches(/[a-zA-Zа-яА-ЯіІїЇ'єЄ]/, "Дозволені символи для прізвища a-z, A-Z, а-я, А-Я"),
-    postal: string()
-      .matches(/[0-9]/, "Дозволені символи для пароля: 0-9"),
+    region: string().matches(
+      /[a-zA-Zа-яА-ЯіІїЇ'єЄ]/,
+      "Дозволені символи для ім'я a-z, A-Z, а-я, А-Я"
+    ),
+    city: string().matches(
+      /[a-zA-Zа-яА-ЯіІїЇ'єЄ]/,
+      "Дозволені символи для прізвища a-z, A-Z, а-я, А-Я"
+    ),
+    address: string().matches(
+      /[a-zA-Zа-яА-ЯіІїЇ'єЄ]/,
+      "Дозволені символи для прізвища a-z, A-Z, а-я, А-Я"
+    ),
+    postal: string().matches(/[0-9]/, "Дозволені символи для пароля: 0-9"),
   });
 
-  
   return (
     <div className={styles.cardsSectionWrapper}>
       <h1 className={styles.cardsSectionHeadline}>Кошик</h1>
       <p className={styles.cardsSectionText}>Ваші замовлення</p>
       {/* eslint-disable-next-line max-len */}
-      { showLoginModalPurchase && <LoginModalPurchase onClose={() => setShowLoginModalPurchase(false)} /> }
+      {showLoginModalPurchase && (
+        <LoginModalPurchase onClose={() => setShowLoginModalPurchase(false)} />
+      )}
       {/* eslint-disable-next-line max-len */}
-      {isCartEmpty ? <p className={!showLoginModalPurchase ? styles.cartEmpty : styles.hidden}>Ваш кошик порожній</p>
-        : (
-          <>
-            <div className={styles.cardsListWrapper}>
-              {cartItems.map((item) => (
-                // eslint-disable-next-line no-underscore-dangle
-                <CartItem key={item._id} item={item} />
-              ))}
-            </div>
-            <div className={styles.totalPriceWrapper}>
-              <div className={styles.totalPrice}>
-                <p>Всього на суму:</p>
-                <p>
-                  {cartItems.reduce((total, item) => {
+      {isCartEmpty ? (
+        <p
+          className={!showLoginModalPurchase ? styles.cartEmpty : styles.hidden}
+        >
+          Ваш кошик порожній
+        </p>
+      ) : (
+        <>
+          <div className={styles.cardsListWrapper}>
+            {cartItems.map((item) => (
+              // eslint-disable-next-line no-underscore-dangle
+              <CartItem key={item._id} item={item} />
+            ))}
+          </div>
+          <div className={styles.totalPriceWrapper}>
+            <div className={styles.totalPrice}>
+              <p>Всього на суму:</p>
+              <p>
+                {cartItems
+                  .reduce((total, item) => {
                     const price = parseFloat(item.currentPrice);
                     const quantity = parseInt(item.cartQuantity, 10);
-                    const sum = total + (price * quantity);
+                    const sum = total + price * quantity;
                     return sum;
-                  }, 0).toFixed(2)}
-                  &nbsp;грн
-                </p>
-              </div>
+                  }, 0)
+                  .toFixed(2)}
+                &nbsp;грн
+              </p>
             </div>
-            <FormButton
-              text="Оформити замовлення"
-              padding="10px"
-              onClick={showForm}
-              className={openForm ? styles.hidden : styles.buttonStyle}
-            />
-          </>
-        )}
-      <div className={openForm && !isCartEmpty ? styles.formSectionWrapper : styles.hidden}>
+          </div>
+          <Button
+            text="Оформити замовлення"
+            padding="10px"
+            onClick={showForm}
+            className={openForm ? styles.hidden : styles.buttonStyle}
+          />
+        </>
+      )}
+      <div
+        className={
+          openForm && !isCartEmpty ? styles.formSectionWrapper : styles.hidden
+        }
+      >
         <div className={styles.formWrapper}>
           <h1 className={styles.headline}>Оформлення замовлення</h1>
-          <p className={`${styles.text} ${styles.headlineText}`}>Заповніть форму</p>
+          <p className={`${styles.text} ${styles.headlineText}`}>
+            Заповніть форму
+          </p>
           <p className={`${styles.textForm}`}>Ваші контактні дані</p>
           <Formik
             initialValues={{
@@ -256,13 +291,12 @@ function Cart() {
                 values.city,
                 values.address,
                 values.postal,
-                values.addressNp,
+                values.addressNp
               );
               setSubmitting(false);
             }}
             validationSchema={validationSchema}
           >
-
             {({ isSubmitting }) => (
               <Form className={styles.form}>
                 <div className={styles.dataCustomerWrapper}>
@@ -273,7 +307,11 @@ function Cart() {
                           {...field}
                           id="firstName"
                           // eslint-disable-next-line max-len
-                          className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                          className={
+                            meta.touched && meta.error
+                              ? styles.inputAttention
+                              : styles.input
+                          }
                           placeholder="Ім'я"
                         />
                       )}
@@ -284,7 +322,11 @@ function Cart() {
                           {...field}
                           id="lastName"
                           // eslint-disable-next-line max-len
-                          className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                          className={
+                            meta.touched && meta.error
+                              ? styles.inputAttention
+                              : styles.input
+                          }
                           placeholder="Прізвище"
                         />
                       )}
@@ -295,7 +337,11 @@ function Cart() {
                           {...field}
                           id="phone"
                           // eslint-disable-next-line max-len
-                          className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                          className={
+                            meta.touched && meta.error
+                              ? styles.inputAttention
+                              : styles.input
+                          }
                           placeholder="Телефон"
                         />
                       )}
@@ -306,7 +352,11 @@ function Cart() {
                           {...field}
                           id="email"
                           // eslint-disable-next-line max-len
-                          className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                          className={
+                            meta.touched && meta.error
+                              ? styles.inputAttention
+                              : styles.input
+                          }
                           placeholder="email"
                         />
                       )}
@@ -325,7 +375,9 @@ function Cart() {
                       onChange={handleChange}
                     />
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                    <label htmlFor="shop" className={styles.text}>Самовивіз з магазину</label>
+                    <label htmlFor="shop" className={styles.text}>
+                      Самовивіз з магазину
+                    </label>
                   </div>
                   <div>
                     <input
@@ -336,7 +388,9 @@ function Cart() {
                       onChange={handleChange}
                     />
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                    <label htmlFor="courier" className={styles.text}>Кур&apos;єр на зазначену адресу</label>
+                    <label htmlFor="courier" className={styles.text}>
+                      Кур&apos;єр на зазначену адресу
+                    </label>
                   </div>
                   <div>
                     <input
@@ -347,11 +401,17 @@ function Cart() {
                       onChange={handleChange}
                     />
                     {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-                    <label htmlFor="option3" className={styles.text}>Самовивіз з Нової Пошти</label>
+                    <label htmlFor="option3" className={styles.text}>
+                      Самовивіз з Нової Пошти
+                    </label>
                   </div>
                 </div>
                 <div className={styles.adressWrapper}>
-                  {selectedOption === "shop" && <div className={styles.shopAdres}>Адреса магазину: м. Київ, вул. Незалежность 11 а</div>}
+                  {selectedOption === "shop" && (
+                    <div className={styles.shopAdres}>
+                      Адреса магазину: м. Київ, вул. Незалежность 11 а
+                    </div>
+                  )}
                   {selectedOption === "courier" && (
                     <div>
                       <Field name="region">
@@ -360,7 +420,11 @@ function Cart() {
                             {...field}
                             id="region"
                             // eslint-disable-next-line max-len
-                            className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                            className={
+                              meta.touched && meta.error
+                                ? styles.inputAttention
+                                : styles.input
+                            }
                             placeholder="Область"
                           />
                         )}
@@ -371,7 +435,11 @@ function Cart() {
                             {...field}
                             id="city"
                             // eslint-disable-next-line max-len
-                            className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                            className={
+                              meta.touched && meta.error
+                                ? styles.inputAttention
+                                : styles.input
+                            }
                             placeholder="Населений пункт"
                           />
                         )}
@@ -382,7 +450,11 @@ function Cart() {
                             {...field}
                             id="address"
                             // eslint-disable-next-line max-len
-                            className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                            className={
+                              meta.touched && meta.error
+                                ? styles.inputAttention
+                                : styles.input
+                            }
                             placeholder="Адреса (вулиця, будинок, квартира)"
                           />
                         )}
@@ -393,7 +465,11 @@ function Cart() {
                             {...field}
                             id="postal"
                             // eslint-disable-next-line max-len
-                            className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                            className={
+                              meta.touched && meta.error
+                                ? styles.inputAttention
+                                : styles.input
+                            }
                             placeholder="Поштовий індекс"
                           />
                         )}
@@ -407,7 +483,11 @@ function Cart() {
                           {...field}
                           id="addressNp"
                           // eslint-disable-next-line max-len
-                          className={meta.touched && meta.error ? styles.inputAttention : styles.input}
+                          className={
+                            meta.touched && meta.error
+                              ? styles.inputAttention
+                              : styles.input
+                          }
                           placeholder="Місто та № відділення Нової Пошти"
                         />
                       )}
@@ -416,14 +496,46 @@ function Cart() {
                 </div>
 
                 <div className={styles.errorsWrapper}>
-                  <ErrorMessage name="firstName" component="p" className={styles.textAttention} />
-                  <ErrorMessage name="lastName" component="p" className={styles.textAttention} />
-                  <ErrorMessage name="phone" component="p" className={styles.textAttention} />
-                  <ErrorMessage name="email" component="p" className={styles.textAttention} />
-                  <ErrorMessage name="region" component="p" className={styles.textAttention} />
-                  <ErrorMessage name="city" component="p" className={styles.textAttention} />
-                  <ErrorMessage name="address" component="p" className={styles.textAttention} />
-                  <ErrorMessage name="postal" component="p" className={styles.textAttention} />
+                  <ErrorMessage
+                    name="firstName"
+                    component="p"
+                    className={styles.textAttention}
+                  />
+                  <ErrorMessage
+                    name="lastName"
+                    component="p"
+                    className={styles.textAttention}
+                  />
+                  <ErrorMessage
+                    name="phone"
+                    component="p"
+                    className={styles.textAttention}
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="p"
+                    className={styles.textAttention}
+                  />
+                  <ErrorMessage
+                    name="region"
+                    component="p"
+                    className={styles.textAttention}
+                  />
+                  <ErrorMessage
+                    name="city"
+                    component="p"
+                    className={styles.textAttention}
+                  />
+                  <ErrorMessage
+                    name="address"
+                    component="p"
+                    className={styles.textAttention}
+                  />
+                  <ErrorMessage
+                    name="postal"
+                    component="p"
+                    className={styles.textAttention}
+                  />
                 </div>
 
                 <div className={styles.buttonWrapper}>

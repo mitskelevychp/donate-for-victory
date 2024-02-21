@@ -7,9 +7,7 @@ function Header() {
   const [isVisible, setIsVisible] = useState(window.innerWidth < 1024);
 
   useEffect(() => {
-    const handleResize = () => {
-      setIsVisible(window.innerWidth < 1024);
-    };
+    const handleResize = () => setIsVisible(window.innerWidth < 1024);
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
   }, []);
