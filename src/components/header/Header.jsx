@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import HeaderMobile from "./HeaderMobile";
 import HeaderLaptop from "./HeaderLaptop";
 import styles from "./Header.module.scss";

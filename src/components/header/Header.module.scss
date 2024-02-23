@@ -154,7 +154,8 @@
   }
 }
 
-.navList {
+.navList,
+.navListActive {
   display: flex;
   align-items: center;
   text-transform: capitalize;
@@ -189,6 +190,10 @@
       display: none;
     }
   }
+}
+
+.navListActive {
+  color: #5d640b;
 }
 
 .dropdown {

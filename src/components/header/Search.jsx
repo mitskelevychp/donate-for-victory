@@ -35,10 +35,9 @@ function Search() {
   };
 
   const toggleInputVisibility = () => {
-    const visibility = !inputVisible;
-    setInputVisible(visibility);
-    setIsLinkVisible(!visibility);
-    context.setIsLinkVisible(!visibility);
+    setInputVisible(!inputVisible);
+    setIsLinkVisible(inputVisible);
+    context.setIsLinkVisible(inputVisible);
   };
 
   const handleClickOutside = useCallback(
@@ -50,6 +49,7 @@ function Search() {
         setInputVisible(false);
         setIsLinkVisible(true);
         context.setIsLinkVisible(true);
+        // setInputValue("");
       }
     },
     [context]
@@ -97,6 +97,7 @@ function Search() {
           handleInputChange={handleInputChange}
           handleSearch={handleSearch}
           ref={searchContainer}
+          // isInputVisible={inputVisible}
         />
       )}
     </div>
