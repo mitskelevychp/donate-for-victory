@@ -1,66 +1,58 @@
-<h1 aligne="center">Donate for Victory</h1>
-<p>DAN.IT, final project</p>
+<h1 aligne="center">"Donate for Victory" project</h1>
 
-## List of Technologies Used
+### About
 
-- JS
-- HTML
-- SCSS
-- React
-- Redux
-- React-Router
-- Formik + Yup
-- Node JS
-- Eslint
-- Stylelint
-- API server (fetch)
-- Vercel (deploy)
+<p>The final project of the educational program at the Ukrainian EdTech center DAN.IT (teamwork of trainee react developers). The project duration is 2 months.</p>
 
+<p>Site: <a href="https://donate-for-victory.web.app" target="_blank">https://donate-for-victory.web.app</a></p>
 
-### How-to-install-NPM-packages
-Run `npm install` to install all required packages.<br>
+<p>Technologies used: React, Redux, react-router, Formik, yup, axios, Eslint. Data storage – MongoDB. Deployment – Vercel. Teamwork - Trello</p>
 
+<p>Idea: a platform for raising donations to support the Armed Forces of Ukraine + an online store.</p>
 
-### How to run local
-Run `npm run start` to run local.<br>
+<p>Design: custom (based on individual projects located in Figma).</p>
 
+<p>Platform activities specifics:</p>
+<ul>
+<li>Sale of goods, with a portion of the income directed to support the Armed Forces of Ukraine;</li>
+<li>Solicitation of donations;</li>
+<li>Charity auctions.</li>
+</ul>
+
+<p>The application allows:</p>
+<ul>
+<li>Registering a user and an administrator;</li>
+<li>Adding a product or a charity item to favorites, making a donation;</li>
+<li>Completing a purchase;</li>
+<li>Subscribing to news updates.</li>
+</ul>
+
+### Teamwork and my contribution
+
+<p>The project team consists of DAN.IT students (5 people).</p>
+<p>I performed the roles of Team Lead and React Developer:</p>
+<ul>
+<li>Application logic, functionality;</li>
+<li>Work coordination;</li>
+<li>Deadline control;</li>
+<li>Code quality control;</li>
+<li>Component development.</li>
+<ul>
+
+### Back-end
+
+<p>The back-end part is provided by DAN.IT.</p>
+
+### Active users for exploring the functionality
+
+<p>Administrator (administrator authorization address: <a href="https://donate-for-victory.web.app/admin" target="_blank">https://donate-for-victory.web.app/admin</a>): login: admin0, password: ghT124dr</p>
+<p>Regular user / buyer: login: justpetro, password: ghT124dr</p>
+
+### How to work with the project locally
+
+npm i - installing packages
+npm start - running the project locally
 
 ### How to fix styles
+
 Run `npm run stylelint-fix-sass` and `npm run lint` to fix eslint and stylelint issues.
-
-
-## Team
-
-### Development team
-[<img src="https://avatars.githubusercontent.com/u/32013116?s=100&v=4" width="100">](https://github.com/grishanych) <span>Grygorii Nych</span>
-<br>
-<br>
-[<img src="https://avatars.githubusercontent.com/u/81797123?v=4" width="100">](https://github.com/mitskelevychp) <span>Pavlo Mitskelevych</span>
-<br>
-<br>
-[<img src="https://i.ibb.co/g4QTPTV/Oleksandra.png" width="100">](https://github.com/OleksandraPylypon) <span>Oleksandra Pylypon</span>
-<br>
-<br>
-[<img src="https://avatars.githubusercontent.com/u/135326455?v=4" width="100">](https://github.com/RostyslavBorovyk2000) <span>Rostyslav Borovyk</span>
-<br>
-<br>
-[<img src="https://i.ibb.co/8PgGR2M/c00072d8-a5bc-494a-80f9-8a487dc557ee.jpg" width="100">](https://github.com/OlegRuin84) <span>Oleg Ruin</span>
-<br>
-
-
-## Tasks Completed by Each Member
-
-1. Grygorii Nych:<br>
-GitHub repository. <br>ESLint​, Stylelint​, Github Actions.<br> Routes. <br>Creation React components.<br> Components testing. <br>Deploy.
-
-2. Pavlo Mitskelevych:<br>
-Application logic.<br> Store data synchronization, localStorage, MongoDB. <br>MongoDB collections. <br>Backend settings. Deploy. <br>Creation React components. <br>Adding content.
-
-3. Oleksandra Pylypon: <br>
-Footer. <br>Product page.<br> Creation React components. <br>Google Maps API. <br>Stylization. <br>Adding content.
-
-4. Rostyslav Borovyk:<br>
-Redux. <br>Error Baundery. <br>Creation React components.
-
-5. Oleg Ruin:<br>
-Creation React components (slider).<br> Components testing.

@@ -5,31 +5,33 @@ import { Link } from "react-router-dom";
 import { Cloudinary } from "@cloudinary/url-gen";
 import PropTypes from "prop-types";
 import { removeFavorites, addToCart } from "../../redux/actions/cartActions";
-import { counterIncrement, counterDecrement } from "../../redux/actionsCreators/counterActionsCreators";
+import {
+  counterIncrement,
+  counterDecrement,
+} from "../../redux/actionsCreators/counterActionsCreators";
 import getFavorites from "../../api/getFavorites";
-import Button, { FormButton } from "../../components/button/Button";
+import Button from "../../components/button/Button";
 import { NEW_CART_URL, NEW_FAVORITES_URL } from "../../endpoints/endpoints";
 import DeleteIcon from "../cart/DeleteIcon";
 import styles from "./Favorites.module.scss";
 
 function LoginModal() {
-  return (
-    <div className={styles.loginModal}>
-      Вже в кошику
-    </div>
-  );
+  return <div className={styles.loginModal}>Вже в кошику</div>;
 }
-
 
 function FavoritesItem({ item }) {
   const dispatch = useDispatch();
-  // eslint-disable-next-line max-len, no-underscore-dangle
-  const isItemInFavorites = useSelector((state) => state.favorites.items.some((favoritesItem) => favoritesItem._id === item._id));
+  const isItemInFavorites = useSelector((state) =>
+    state.favorites.items.some(
+      (favoritesItem) => favoritesItem._id === item._id
+    )
+  );
   const cartItems = useSelector((state) => state.cart.items);
-  // eslint-disable-next-line max-len, no-underscore-dangle
-  const isProductInCart = cartItems.some((cartItem) => cartItem._id === item._id);
+  const isProductInCart = cartItems.some(
+    (cartItem) => cartItem._id === item._id
+  );
   const shouldRenderButton = item.category === "Одяг";
-  
+
   // window
   const [showLoginModal, setShowLoginModal] = useState(false);
   const timerRef = useRef();
@@ -61,7 +63,7 @@ function FavoritesItem({ item }) {
     try {
       if (!isProductInCart) {
         await axios
-        // eslint-disable-next-line max-len, no-underscore-dangle
+          // eslint-disable-next-line max-len, no-underscore-dangle
           .put(`${NEW_CART_URL}/${item._id}`)
           .catch((err) => {
             console.log(err);
@@ -87,17 +89,14 @@ function FavoritesItem({ item }) {
     }
   };
 
-
   async function deleteFavoritesFromServer() {
     const cartData = await getFavorites();
     if (cartData.data.products.length !== null) {
       // eslint-disable-next-line no-underscore-dangle
       const idToDelete = item._id ? item._id : item.id;
-      axios
-        .delete(`${NEW_FAVORITES_URL}/${idToDelete}`)
-        .catch((err) => {
-          console.log(err);
-        });
+      axios.delete(`${NEW_FAVORITES_URL}/${idToDelete}`).catch((err) => {
+        console.log(err);
+      });
     }
   }
 
@@ -109,48 +108,57 @@ function FavoritesItem({ item }) {
       dispatch(counterDecrement());
     }
   };
-  
-   
+
   return (
     <div className={styles.cardItemWrapper}>
       <div className={styles.productInfo}>
         <Link to={`/product/${item.itemNo}`}>
           <div className={styles.cardItemImageWrapper}>
             {/* eslint-disable-next-line max-len */}
-            <img src={imageURL || item.imageURL} alt={item.name} className={styles.cardItemImage} />
+            <img
+              src={imageURL || item.imageURL}
+              alt={item.name}
+              className={styles.cardItemImage}
+            />
           </div>
         </Link>
         <div className={styles.nameContainer}>
           <Link to={`/product/${item.itemNo}`}>
             <p className={styles.name}>{item.name}</p>
             <p className={styles.sku}>
-              <span>Код товару:</span>
-              {" "}
-              {item.itemNo}
+              <span>Код товару:</span> {item.itemNo}
             </p>
           </Link>
         </div>
       </div>
       <div className={styles.cardItemPriceWrapper}>
         <div className={styles.cardItemPrice}>
-          {item.currentPrice ? (
-            <div>
-              {item.currentPrice}
-              {" "}
-              грн
-            </div>
-          ) : "-"}
+          {item.currentPrice ? <div>{item.currentPrice} грн</div> : "-"}
         </div>
       </div>
       <div className={styles.buttonsWrapper}>
-        {showLoginModal && <LoginModal onClose={() => setShowLoginModal(false)} />}
+        {showLoginModal && (
+          <LoginModal onClose={() => setShowLoginModal(false)} />
+        )}
         {shouldRenderButton && (
-        <div className={!showLoginModal ? styles.button : styles.buttonHidden}>
-          <FormButton text="До кошика" padding="10px" onClick={!isProductInCart ? handleAddFavoritesToCart : promptLogin} />
-        </div>
+          <div
+            className={!showLoginModal ? styles.button : styles.buttonHidden}
+          >
+            <Button
+              text="До кошика"
+              padding="10px"
+              onClick={
+                !isProductInCart ? handleAddFavoritesToCart : promptLogin
+              }
+            />
+          </div>
         )}
         <div className={styles.quantityButtonWrapper}>
-          <Button className={styles.buttonDelete} style={{ backgroundColor: "none" }} onClick={() => handleRemoveFromFavorites()}>
+          <Button
+            className={styles.buttonDelete}
+            style={{ backgroundColor: "none" }}
+            onClick={() => handleRemoveFromFavorites()}
+          >
             <DeleteIcon />
           </Button>
         </div>

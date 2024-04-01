@@ -3,25 +3,21 @@ import { useSelector, useDispatch } from "react-redux";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { updateInputValue } from "../../redux/actionsCreators/inputValueActionsCreators";
-import { GET_PRODUCTS_URL, GET_SEARCH } from "../../endpoints/endpoints";
+import { GET_SEARCH } from "../../endpoints/endpoints";
+import {
+  renderCategoriyLink,
+  renderSubCategoryLink,
+} from "../../scripts/isCategory";
 import styles from "./Header.module.scss";
 
 const SearchForm = forwardRef((props, ref) => {
-  const dispatch = useDispatch();
   const [searchResults, setSearchResults] = useState([]);
   const [showInput, setShowInput] = useState(false);
+  const dispatch = useDispatch();
   const inputValueFromRedux = useSelector(
     (state) => state.inputValue.inputValue
   );
   const [inputValue, setInputValue] = useState(inputValueFromRedux);
-  const [debounceTimeoutId, setDebounceTimeoutId] = useState(null);
-  const getProductDetails = async (productId) => {
-    try {
-      await axios.get(`${GET_PRODUCTS_URL}/${productId}`);
-    } catch (error) {
-      console.error("Помилка при отриманні деталей товару:", error);
-    }
-  };
 
   const performSearch = async (query) => {
     try {
@@ -41,17 +37,15 @@ const SearchForm = forwardRef((props, ref) => {
       }
     } catch (error) {
       console.error("Error while searching for products:", error);
-      setSearchResults([]);
-      setShowInput(false);
     }
   };
 
-  const handleResultClick = async (result) => {
-    setSearchResults([]);
-    setShowInput(false);
-
-    if (result) {
-      await getProductDetails(result.id);
+  const handleResultClick = async () => {
+    try {
+      setSearchResults([]);
+      setShowInput(false);
+    } catch (error) {
+      console.error("Error while searching for products:", error);
     }
   };
 
@@ -60,24 +54,16 @@ const SearchForm = forwardRef((props, ref) => {
     dispatch(updateInputValue(value));
     setInputValue(value);
 
-    if (debounceTimeoutId) {
-      clearTimeout(debounceTimeoutId);
-    }
-
     if (value === "") {
       setSearchResults([]);
       handleResultClick();
     } else {
-      const newTimeoutId = setTimeout(() => {
-        performSearch(value);
-      }, 1000);
-
-      setDebounceTimeoutId(newTimeoutId);
+      performSearch(value);
     }
   };
 
   return (
-    <div className={styles.searching}>
+    <div className={styles.searching} ref={ref}>
       <div className={styles.inputWrapper}>
         <input
           className={styles.input}
@@ -85,7 +71,6 @@ const SearchForm = forwardRef((props, ref) => {
           placeholder="Пошук..."
           value={inputValue}
           onChange={handleInputChange}
-          ref={ref}
         />
         {showInput && (
           <div className={styles.searchResults}>
@@ -97,12 +82,18 @@ const SearchForm = forwardRef((props, ref) => {
                     <Link
                       to={`/product/${result.itemNo}`}
                       key={result.id}
-                      className={styles.searchResultItem}
+                      onClick={() => handleResultClick()}
                     >
                       {result.shortName}
                     </Link>
                   </li>
                 ))}
+              {searchResults.length > 0 && inputValue !== "" && (
+                <>
+                  {renderSubCategoryLink(searchResults, handleResultClick)}
+                  {renderCategoriyLink(searchResults, handleResultClick)}
+                </>
+              )}
             </ul>
           </div>
         )}

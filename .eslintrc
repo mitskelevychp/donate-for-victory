@@ -7,10 +7,14 @@
   "extends": ["airbnb", "react-app"],
   "plugins": ["react"],
   "rules": {
+    "no-underscore-dangle": "off",
+    "react/no-array-index-key": "off",
     "object-curly-newline": "off",
     "react/jsx-one-expression-per-line": "off",
     "comma-dangle": "off",
     "max-len": "off",
+    "function-paren-newline": "off",
+    "implicit-arrow-linebreak": "off",
     "operator-linebreak": "off",
     "quotes": ["error", "double"], //всі лапки подвійні
     "indent": [2], // Встановлення відступу на 2 пробіли
@@ -20,7 +24,10 @@
     "no-console": "off",
     "no-param-reassign": "off", // вимкнення присвоєння властивостей параметрам-масивам
     "import/prefer-default-export": "off", // дозволяти export без default якщо лише одна функція в компоненті
-    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-filename-extension": [
+      1,
+      { "extensions": [".js", ".jsx", ".tsx"] }
+    ],
     "no-plusplus": "off",
     "default-param-last": "off",
     "linebreak-style": ["error", "unix"],

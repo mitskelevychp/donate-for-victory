@@ -9,11 +9,11 @@ import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import Context from "../Context";
 import { updateInputValue } from "../../redux/actionsCreators/inputValueActionsCreators";
-import styles from "./Header.module.scss";
 import SearchIcon from "./SearchIcon";
 import SearchForm from "./SearchForm";
 import HeartFavorite from "./icons/favorites/Heart";
 import Cart from "./icons/cart/IconCart";
+import styles from "./Header.module.scss";
 
 function Search() {
   const [isLinkVisible, setIsLinkVisible] = useState(true);
@@ -35,10 +35,9 @@ function Search() {
   };
 
   const toggleInputVisibility = () => {
-    const visibility = !inputVisible;
-    setInputVisible(visibility);
-    setIsLinkVisible(!visibility);
-    context.setIsLinkVisible(!visibility);
+    setInputVisible(!inputVisible);
+    setIsLinkVisible(inputVisible);
+    context.setIsLinkVisible(inputVisible);
   };
 
   const handleClickOutside = useCallback(
@@ -50,6 +49,7 @@ function Search() {
         setInputVisible(false);
         setIsLinkVisible(true);
         context.setIsLinkVisible(true);
+        // setInputValue("");
       }
     },
     [context]
@@ -97,6 +97,7 @@ function Search() {
           handleInputChange={handleInputChange}
           handleSearch={handleSearch}
           ref={searchContainer}
+          // isInputVisible={inputVisible}
         />
       )}
     </div>

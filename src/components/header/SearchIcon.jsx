@@ -1,19 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
-import styles from "./Header.module.scss";
 import { IconSearch } from "./icons/search/IconSearch";
+import styles from "./Header.module.scss";
 
 function SearchIcon({ onClick }) {
   return (
-    <div
-      className={styles.iconSearch}
-      onClick={onClick}
-      onKeyDown={onClick}
-      role="button"
-      tabIndex={0}
-    >
+    <button type="button" className={styles.iconSearch} onClick={onClick}>
       <IconSearch />
-    </div>
+    </button>
   );
 }
 
