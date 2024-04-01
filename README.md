@@ -37,7 +37,7 @@
 <li>Deadline control;</li>
 <li>Code quality control;</li>
 <li>Component development.</li>
-<ul>
+</ul>
 
 <h2>Back-end</h2>
 
