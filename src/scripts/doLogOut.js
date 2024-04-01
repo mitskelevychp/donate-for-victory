@@ -2,6 +2,7 @@ import store from "../redux/store";
 import { logOut } from "../redux/actions/loggedInActions";
 import { resetCart, resetFavorites } from "../redux/actions/cartActions";
 
+// TODO: do we need async???
 const doLogOut = async () => {
   try {
     localStorage.removeItem("userLogin");
