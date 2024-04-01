@@ -1,6 +1,6 @@
 <h1 aligne="center">"Donate for Victory" project</h1>
 
-### About
+<h2>About</h2>
 
 <p>The final project of the educational program at the Ukrainian EdTech center DAN.IT (teamwork of trainee react developers). The project duration is 2 months.</p>
 
@@ -27,7 +27,7 @@
 <li>Subscribing to news updates.</li>
 </ul>
 
-### Teamwork and my contribution
+<h2>Teamwork and my contribution</h2>
 
 <p>The project team consists of DAN.IT students (5 people).</p>
 <p>I performed the roles of Team Lead and React Developer:</p>
@@ -39,20 +39,18 @@
 <li>Component development.</li>
 <ul>
 
-### Back-end
+<h2>Back-end</h2>
 
 <p>The back-end part is provided by DAN.IT.</p>
 
-### Active users for exploring the functionality
+<h2>Active users for exploring the functionality</h2>
 
 <p>Administrator (administrator authorization address: <a href="https://donate-for-victory.web.app/admin" target="_blank">https://donate-for-victory.web.app/admin</a>): login: admin0, password: ghT124dr</p>
 <p>Regular user / buyer: login: justpetro, password: ghT124dr</p>
 
-### How to work with the project locally
+<h2>How to work with the project locally</h2>
 
 npm i - installing packages
 npm start - running the project locally
-
-### How to fix styles
 
 Run `npm run stylelint-fix-sass` and `npm run lint` to fix eslint and stylelint issues.

@@ -6,6 +6,11 @@
 .pnp.js
 .idea
 .stylelintcache
+.eslintignore
+.eslintrc
+.firebaserc
+.gitattributes
+package-lock.json
 
 # testing
 /coverage
