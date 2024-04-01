@@ -45,7 +45,7 @@
 
 <h2>Active users for exploring the functionality</h2>
 
-<p>Administrator (administrator authorization address: <a href="https://donate-for-victory.web.app/admin" target="_blank">https://donate-for-victory.web.app/admin</a>):<br>
+<p><b>Administrator</b> (administrator authorization address: <a href="https://donate-for-victory.web.app/admin" target="_blank">https://donate-for-victory.web.app/admin</a>):<br>
 login: admin0,<br>
 password: ghT124dr</p>
 <p><b>Regular user / buyer</b>:<br>
