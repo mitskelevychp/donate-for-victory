@@ -4,9 +4,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import {
-  Form, Field, ErrorMessage, Formik,
-} from "formik";
+import { Form, Field, ErrorMessage, Formik } from "formik";
 import axios from "axios";
 import { object, string } from "yup";
 import PropTypes from "prop-types";
@@ -16,7 +14,6 @@ import { FormButton } from "../button/Button";
 import logInUser from "../../api/logInUser";
 import { GET_CUSTOMER } from "../../endpoints/endpoints";
 import styles from "./LogIn.module.scss";
-
 
 function LogIn({ headline, toRegistration }) {
   const [showPassword, setShowPassword] = useState(false);
@@ -46,7 +43,7 @@ function LogIn({ headline, toRegistration }) {
       return null;
     }
   }
-  
+
   const handleUserLogin = async (login, password) => {
     try {
       await dispatch(logInUser(login, password));
@@ -67,7 +64,9 @@ function LogIn({ headline, toRegistration }) {
     <section className={styles.windowWrapper}>
       <div className={styles.window}>
         <h1 className={styles.headline}>{headline}</h1>
-        <p className={`${styles.text} ${styles.headlineText}`}>Введіть логін та пароль, щоб увійти</p>
+        <p className={`${styles.text} ${styles.headlineText}`}>
+          Введіть логін та пароль, щоб увійти
+        </p>
 
         <Formik
           initialValues={{ login: "", password: "" }}
@@ -77,7 +76,6 @@ function LogIn({ headline, toRegistration }) {
           }}
           validationSchema={validationSchema}
         >
-
           {({ isSubmitting }) => (
             <Form className={styles.form}>
               <Field name="login">
@@ -117,16 +115,39 @@ function LogIn({ headline, toRegistration }) {
                   </div>
                 )}
               </Field>
-              <FormButton type="submit" className={styles.buttonStyle} width="300px" text="Увійти" disabled={isSubmitting} />
-              {showError && <p className={showError && styles.textAttention}>Такого користувача не існує. Спершу зареєструйтесь</p>}
+              <FormButton
+                type="submit"
+                className={styles.buttonStyle}
+                width="300px"
+                text="Увійти"
+                disabled={isSubmitting}
+              />
+              {showError && (
+                <p className={showError && styles.textAttention}>
+                  Такого користувача не існує. Спершу зареєструйтесь
+                </p>
+              )}
               <div className={styles.errorsWrapper}>
-                <ErrorMessage name="login" component="p" className={styles.textAttention} />
-                <ErrorMessage name="password" component="p" className={styles.textAttention} />
+                <ErrorMessage
+                  name="login"
+                  component="p"
+                  className={styles.textAttention}
+                />
+                <ErrorMessage
+                  name="password"
+                  component="p"
+                  className={styles.textAttention}
+                />
               </div>
             </Form>
           )}
         </Formik>
-        <Link to={toRegistration} className={`${styles.text} ${styles.textRegistration}`}>Зареєструватися</Link>
+        <Link
+          to={toRegistration}
+          className={`${styles.text} ${styles.textRegistration}`}
+        >
+          Зареєструватися
+        </Link>
       </div>
     </section>
   );
