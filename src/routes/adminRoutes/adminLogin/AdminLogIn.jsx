@@ -38,7 +38,7 @@ function AdminLogIn() {
             },
           }}
         >
-          https://donate-for-victory.web.app/admin/
+          https://donate-for-victory.web.app/log-in
         </a>
       </div>
       {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! for portfolio !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */}
